@@ -39,16 +39,18 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-sticky">
         <a class="navbar-brand" href="javascript:void(0)">
             <img src="imgs/weCayer-logo.png" height="28px" alt="">
             weCayer
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar"
+            aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#">About weCayer</a>
@@ -61,6 +63,28 @@
                 </li>
         </div>
     </nav>
+
+    <!-- banner slideshow -->
+    <div id="banner" class="d-flex justify-content-end position-relative">
+        <div id="bannerImage" class="w-100 h-100"></div>
+
+        <div id="overlayContent" class="position-absolute h-100">
+
+            <div class="m-auto d-flex flex-column h-100 justify-content-center">
+                <h1 class="text-light p-5 rounded-lg">It's time to give them back!</h1>
+
+                <div class="d-flex justify-content-center mt-5">
+                    <a href="#" class="btn btn-lg btn-success">Get Started Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- about section -->
+    <div id="aboutUs">
+        <div class="container py-5">
+        </div>
+    </div>
 
 </body>
 

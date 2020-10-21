@@ -7,35 +7,112 @@ body *:focus{
     outline: transparent;
 }
 
-.navbar{
-    padding: 1rem 2rem;
+body{
+    background: #feeeca;
 }
 
+
+/******************\
+|* Navigation bar *|
+\******************/
+
+.navbar{
+    padding: 1rem 2rem;
+    top: 0;
+    z-index: 1000;
+}
 .navbar-brand{
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 1.75rem;
-    transition: all .5s;
+    transition: all 1s;
 }
-
 .navbar-toggler{
     padding: 0.1rem 0.25rem;
 }
-
 li.nav-item{
     transition: all .25s;
 }
-
 li.nav-item:not(:last-child) {
     margin-right: 1rem;
 }
-
 li.nav-item:last-child .nav-link{
     padding-right: 0;
 }
-
 .navbar-brand:hover, .nav-item:hover{
     transform: scale(1.1);
+}
+
+
+/*******************\
+|* Banner Carousel *|
+\*******************/
+
+#bannerImage{
+    background-image: url("imgs/hero-image.jpg");
+    background-size: cover;
+    position: relative;
+    padding-top: 38.62%;
+}
+
+#overlayContent{
+    width: 45vw;
+    font-family: "Roboto";
+    font-weight: bold;
+}
+
+#overlayContent > div{
+    max-width: 30vw;
+}
+
+#overlayContent h1{
+    background: -webkit-linear-gradient(top, #101010, #505050, #101010);
+    background-size: 300% 300%;
+    background-position: 0% 50%;
+}
+
+#banner:hover h1{
+    animation: hanging 5s linear 0s infinite normal none;
+    transform-origin: top;
+}
+
+
+
+/********************\
+|* About Us Section *|
+\********************/
+
+#aboutUs{
+    background: #852b42;
+}
+
+
+
+
+
+
+
+
+
+
+@keyframes hanging{
+    0% {
+        transform: perspective(2000px) ;
+    }
+    25% {
+        transform: perspective(2000px) rotateX(10deg);
+        background-position: 0% 25%;
+    }
+    50% {
+        transform: perspective(2000px) rotateX(0deg);
+    }
+    75% {
+        transform: perspective(2000px) rotateX(-10deg);
+        background-position: 0% 75%;
+    }
+    100% {
+        transform: perspective(2000px) rotateX(0deg);
+    }
 }
 
 @media (orientation: portrait){
@@ -43,7 +120,7 @@ li.nav-item:last-child .nav-link{
     .navbar{
         padding: 0.5rem 1rem;
     }
-    .nav-item:hover{
+    .navbar-brand:hover, .nav-item:hover{
         transform: none;
     }
     #navbarSupportedContent li:not(:last-child){
