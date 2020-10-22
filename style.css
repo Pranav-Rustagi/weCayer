@@ -6,10 +6,15 @@ font-family: 'Roboto', sans-serif; */
 body *:focus{
     outline: transparent;
 }
-
 body{
-    background: #feeeca;
+    background: #852b42;
 }
+/* body::-webkit-scrollbar{
+    width: 0.25rem;
+    background: #000;
+    display: none;
+} */
+
 
 
 /******************\
@@ -48,33 +53,55 @@ li.nav-item:last-child .nav-link{
 |* Banner Carousel *|
 \*******************/
 
+#banner{
+    overflow: hidden;
+    color: #ebe1d4;
+}
 #bannerImage{
     background-image: url("imgs/hero-image.jpg");
     background-size: cover;
     position: relative;
     padding-top: 38.62%;
+    transition: all 2.5s;
 }
-
 #overlayContent{
     width: 45vw;
-    font-family: "Roboto";
-    font-weight: bold;
 }
-
 #overlayContent > div{
-    max-width: 30vw;
+    max-width: 35vw;
+    background: #b8896b;
 }
 
+.bannerText{
+    font-family: 'Courgette', cursive;
+    font-size: 3.5vw;
+    color: #ebe1d4;
+    transition: all 2.5s;
+    transition-delay: 0.5s;
+    text-shadow: 0.25rem 0.25rem 1.5px #585858;
+}
+
+#banner:hover #bannerImage{
+    transform: scale(1.05);
+}
+
+#banner:hover .bannerText{
+    transform: scale(1.05);
+    text-shadow: 0.5rem 0.5rem 3px #585858;
+}
+
+/* 
 #overlayContent h1{
-    background: -webkit-linear-gradient(top, #101010, #505050, #101010);
+    background: -webkit-linear-gradient(top, #101010, #707070, #101010);
     background-size: 300% 300%;
     background-position: 0% 50%;
-}
+} */
 
-#banner:hover h1{
+/* #banner:hover h1{
     animation: hanging 5s linear 0s infinite normal none;
     transform-origin: top;
-}
+    transition: all .3s;
+} */
 
 
 
@@ -83,7 +110,7 @@ li.nav-item:last-child .nav-link{
 \********************/
 
 #aboutUs{
-    background: #852b42;
+    /* background: #852b42; */
 }
 
 
@@ -100,20 +127,24 @@ li.nav-item:last-child .nav-link{
         transform: perspective(2000px) ;
     }
     25% {
-        transform: perspective(2000px) rotateX(10deg);
+        transform: perspective(2000px) rotateX(30deg);
         background-position: 0% 25%;
     }
     50% {
         transform: perspective(2000px) rotateX(0deg);
     }
     75% {
-        transform: perspective(2000px) rotateX(-10deg);
+        transform: perspective(2000px) rotateX(-30deg);
         background-position: 0% 75%;
     }
     100% {
         transform: perspective(2000px) rotateX(0deg);
     }
 }
+
+
+
+
 
 @media (orientation: portrait){
 
@@ -125,5 +156,10 @@ li.nav-item:last-child .nav-link{
     }
     #navbarSupportedContent li:not(:last-child){
         border-bottom: 1px solid rgba(255,255,255,.5);
+    }
+
+
+    #banner:hover #bannerImage, #banner:hover .bannerText{
+        transform: none;
     }
 }
