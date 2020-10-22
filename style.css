@@ -8,6 +8,7 @@ body *:focus{
 }
 body{
     background: #852b42;
+    overflow-x: hidden;
 }
 /* body::-webkit-scrollbar{
     width: 0.25rem;
@@ -25,6 +26,7 @@ body{
     padding: 1rem 2rem;
     top: 0;
     z-index: 1000;
+    opacity: 0.95;
 }
 .navbar-brand{
     font-family: "Montserrat", sans-serif;
@@ -90,14 +92,14 @@ li.nav-item:last-child .nav-link{
     text-shadow: 0.5rem 0.5rem 3px #585858;
 }
 
-/* 
-#overlayContent h1{
+
+/* #overlayContent h1{
     background: -webkit-linear-gradient(top, #101010, #707070, #101010);
     background-size: 300% 300%;
     background-position: 0% 50%;
-} */
+}
 
-/* #banner:hover h1{
+#banner:hover h1{
     animation: hanging 5s linear 0s infinite normal none;
     transform-origin: top;
     transition: all .3s;
@@ -110,7 +112,38 @@ li.nav-item:last-child .nav-link{
 \********************/
 
 #aboutUs{
-    /* background: #852b42; */
+    margin: 5vw 0;
+}
+
+.section-title{
+    font-size: 5vw;
+    font-weight: normal;
+    font-family: "Montserrat";
+    position: relative;
+    transition: all 1s;
+    transition-delay: 0.25s;
+    box-shadow: 0 0.25rem 1rem 0 rgba(0, 0, 0, 0.5);
+}
+
+.section-title ~ div {
+    margin-top: 2.5vw;
+    max-width: 90vw;
+    transition: all 0.5s;
+    background: #f8f9fa40;
+}
+
+.section-title ~ div .lead{
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* 
+.section-title ~ div .card-img{
+    max-height: 20vw;
+    max-width: 20vw;
+} */
+
+#aboutUs:hover .section-title, #aboutUs:hover .section-title ~ div {
+    box-shadow: 0 1rem 1rem 0 rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
 }
 
 
@@ -122,7 +155,7 @@ li.nav-item:last-child .nav-link{
 
 
 
-@keyframes hanging{
+/* @keyframes hanging{
     0% {
         transform: perspective(2000px) ;
     }
@@ -140,7 +173,7 @@ li.nav-item:last-child .nav-link{
     100% {
         transform: perspective(2000px) rotateX(0deg);
     }
-}
+} */
 
 
 
@@ -148,7 +181,7 @@ li.nav-item:last-child .nav-link{
 
 @media (orientation: portrait){
 
-    .navbar{
+    .navbar, .section-title{
         padding: 0.5rem 1rem;
     }
     .navbar-brand:hover, .nav-item:hover{
@@ -160,6 +193,24 @@ li.nav-item:last-child .nav-link{
 
 
     #banner:hover #bannerImage, #banner:hover .bannerText{
+        transform: none;
+    }
+
+    #banner .bannerText{
+        text-shadow: none;
+    }
+
+    .section-title{
+        font-size: calc(4vw + 1rem);
+        box-shadow: 0 0.25rem 1rem 0.1rem rgba(0, 0, 0, 0.5);
+    }
+
+    #aboutUs{
+        margin: 5vh 0;
+    }
+
+    #aboutUs > div:hover .section-title{
+        box-shadow: 0 0.25rem 1rem 0.1rem rgba(0, 0, 0, 0.5);
         transform: none;
     }
 }
