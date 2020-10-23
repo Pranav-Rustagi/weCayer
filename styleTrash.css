@@ -1,0 +1,200 @@
+/*font-family: 'Montserrat', sans-serif;
+font-family: 'Roboto', sans-serif; */
+
+body *:focus{
+    outline: transparent;
+}
+body{
+    background: #852b42;
+    overflow-x: hidden;
+    cursor: default;
+}
+
+
+/******************\
+|* Navigation bar *|
+\******************/
+
+.navbar{
+    padding: 1rem 2rem;
+    top: 0;
+    z-index: 1000;
+    opacity: 0.95;
+}
+.navbar-brand{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 1.75rem;
+    transition: all 1s;
+}
+.navbar-toggler{
+    padding: 0.1rem 0.25rem;
+}
+li.nav-item{
+    transition: all .25s;
+}
+.navbar-brand:hover, .nav-item:hover{
+    transform: scale(1.1);
+}
+
+.nav-item.active{
+    border-bottom: 0.25vw solid #fff;
+}
+
+
+/*******************\
+|* Banner Carousel *|
+\*******************/
+
+#banner{
+    color: #ebe1d4;
+}
+#bannerImage{
+    background-image: url("imgs/hero-image.jpg");
+    background-size: cover;
+    padding-top: 38.62%;
+    transition: all 2.5s;
+}
+#overlayContent{
+    width: 45vw;
+}
+#overlayContent > div{
+    max-width: 35vw;
+    background: #b8896b;
+}
+
+.bannerText{
+    font-family: 'Courgette', cursive;
+    font-size: 3.5vw;
+    color: #ebe1d4;
+    transition: all 2.5s;
+    transition-delay: 0.5s;
+    text-shadow: 0.25rem 0.25rem 1.5px #585858;
+}
+
+#banner:hover #bannerImage{
+    transform: scale(1.05);
+}
+
+#banner:hover .bannerText{
+    transform: scale(1.05);
+    text-shadow: 0.5rem 0.5rem 3px #585858;
+}
+
+
+/* #overlayContent h1{
+    background: -webkit-linear-gradient(top, #101010, #707070, #101010);
+    background-size: 300% 300%;
+    background-position: 0% 50%;
+}
+
+#banner:hover h1{
+    animation: hanging 5s linear 0s infinite normal none;
+    transform-origin: top;
+    transition: all .3s;
+} */
+
+
+
+/********************\
+|* About Us Section *|
+\********************/
+
+#aboutUs{
+    margin: 5vw 0;
+}
+
+.section-title{
+    font-size: 5vw;
+    font-family: "Montserrat";
+    transition: all 1s;
+    transition-delay: 0.25s;
+    box-shadow: 0 0.25rem 1rem 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 2.5vw;
+}
+
+.section-title ~ div {
+    margin-top: 2.5vw;
+    max-width: 90vw;
+    transition: all 0.5s;
+    background: #f8f9fa40;
+}
+
+.section-title ~ div p{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#aboutUs:hover .section-title, #aboutUs:hover .section-title ~ div {
+    box-shadow: 0 1rem 1rem 0 rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+
+/* @keyframes hanging{
+    0% {
+        transform: perspective(2000px) ;
+    }
+    25% {
+        transform: perspective(2000px) rotateX(30deg);
+        background-position: 0% 25%;
+    }
+    50% {
+        transform: perspective(2000px) rotateX(0deg);
+    }
+    75% {
+        transform: perspective(2000px) rotateX(-30deg);
+        background-position: 0% 75%;
+    }
+    100% {
+        transform: perspective(2000px) rotateX(0deg);
+    }
+} */
+
+
+
+
+
+@media (orientation: portrait){
+
+    .navbar, .section-title{
+        padding: 0.5rem 1rem;
+    }
+    .navbar-brand:hover, .nav-item:hover{
+        transform: none;
+    }
+    #navbarSupportedContent li:not(:last-child){
+        border-bottom: 1px solid rgba(255,255,255,.5);
+    }
+
+
+    #banner:hover #bannerImage, #banner:hover .bannerText{
+        transform: none;
+    }
+
+    #banner .bannerText{
+        text-shadow: none;
+    }
+
+    .section-title{
+        font-size: calc(4vw + 1rem);
+        box-shadow: 0 0.25rem 1rem 0.1rem rgba(0, 0, 0, 0.5);
+        margin-bottom: 5vw;
+    }
+
+    #aboutUs{
+        margin: 5vh 0;
+    }
+
+    #aboutUs > div:hover .section-title{
+        box-shadow: 0 0.25rem 1rem 0.1rem rgba(0, 0, 0, 0.5);
+        transform: none;
+    }
+}
