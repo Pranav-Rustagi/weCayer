@@ -4,6 +4,11 @@ body {
     cursor: default;
 }
 
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 /*****************\
 |*    Section    *|
 \*****************/
@@ -16,10 +21,13 @@ section {
 |* Navigation bar *|
 \******************/
 
-.navbar {
-    padding: 1rem 2rem;
+section:first-child {
     top: 0;
     z-index: 1000;
+}
+
+.navbar {
+    padding: 1rem 2rem;
     opacity: 0.95;
 }
 .navbar-brand {
@@ -80,9 +88,9 @@ li.nav-item {
     text-shadow: 0.5rem 0.5rem 3px #585858;
 }
 
-/********************\
-|* About Us Section *|
-\********************/
+/*****************************\
+|* Common Section properties *|
+\*****************************/
 
 .section-title {
     font-size: 5vw;
@@ -97,16 +105,41 @@ li.nav-item {
     max-width: 90vw;
     transition: all 0.5s;
     background: #f8f9fa40;
-}
-.section-title ~ div p {
     font-family: Arial, Helvetica, sans-serif;
 }
-#aboutUs:hover .section-title,
-#aboutUs:hover .section-title ~ div {
+
+section:hover .section-title,
+section:hover .section-title ~ div {
     box-shadow: 0 1rem 1rem 0 rgba(0, 0, 0, 0.5);
     transform: scale(1.05);
 }
 
+/********************\
+|* About Us Section *|
+\********************/
+
+/************************\
+|* How it works Section *|
+\************************/
+
+#howItWorks .btn {
+    right: 0;
+    top: -0.75rem;
+    line-height: 2.75rem;
+    font-size: 2.25rem;
+    transition: all 0.5s;
+}
+
+#howItWorks div[aria-expanded="true"] .btn {
+    transform: rotate(180deg);
+}
+
+#footer svg, #footer img {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: text-top;
+}
 /*********************\
 |*   Portrait mode   *|
 \*********************/
@@ -144,12 +177,12 @@ li.nav-item {
         box-shadow: 0 0.25rem 1rem 0.1rem rgba(0, 0, 0, 0.5);
         margin-bottom: 5vw;
     }
-    #aboutUs:hover .section-title,
-    #aboutUs:hover .section-title ~ div {
+    section:hover .section-title,
+    section:hover .section-title ~ div {
         box-shadow: 0 0.25rem 1rem 0 rgba(0, 0, 0, 0.5);
         transform: none;
     }
-    #aboutUs:hover .section-title ~ div{
+    section:hover .section-title ~ div {
         box-shadow: none;
     }
 }
