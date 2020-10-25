@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="form-group row m-0 px-3 mt-3">
-                    <button type="button" class="btn btn-success m-auto">Sign In</button>
+                    <button type="button" id="signInButton" class="btn btn-success m-auto">Sign In</button>
                 </div>
             </form>
         </div>
@@ -99,7 +99,8 @@
                     <h1 class="h5 p-3 border-top border-light">Applying for : </h1>
                     <div class="form-group row m-0 px-3 mt-3 flex-column align-items-start">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="applyingFor" id="warrior" value="warrior">
+                            <input class="form-check-input" type="radio" name="applyingFor" id="warrior"
+                                value="warrior">
                             <label class="form-check-label" for="warrior">Corona warrior</label>
                         </div>
                         <div class="form-check">
@@ -177,32 +178,83 @@
 
     <script>
         $(window).on('load', () => {
-            var target = location.href.split('?target=')[1].split("?")[0];
-            $('.nav-item[data-target = ' + target + ']').addClass('active').siblings().removeClass('active');
-            $('#contentBlock > div[data-block = ' + target + ']').show();
+            let firstTemp = location.href.split('?target=')[1];
+            var target;
+            if (firstTemp)
+                target = firstTemp.split("?")[0];
+
+            if (target != "signup" && target != "signin")
+                target = "signup";
+
+            $('.nav-item[data-target = ' + target + ']').click();
         })
+
+
 
         $('.nav-item').click(function (event) {
             event.preventDefault()
             $(this).addClass('active').siblings().removeClass('active');
             let target = $(this).data("target");
             $('#contentBlock > div[data-block = ' + target + ']').show().siblings().hide();
-            if(target === 'signin'){
+            if (target === 'signin') {
                 $('#forSignUp form > div:not(:first-child):not(:last-child)').slideUp()
             }
-            $('form').each((ind, el)=>{
+            $('form').each((ind, el) => {
                 el.reset();
             })
         })
 
-        $('#continue').click(function(){
+
+
+        $('#continue').click(function () {
             let blocks = $(this).parent().siblings().filter(':visible').last();
-            console.log(blocks)
             let next = blocks.next();
-            if(!next.is($(this).parent())){
+            if (!next.is($(this).parent())) {
                 next.slideDown();
             }
+            else {
+                str = "";
+                str += "appliedFor=" + $("[applyingFor]").val() + ",";
+                str += "email=" + $("#email").val() + ",";
+                str += "password" + $("#password").val() + ",";
+                str += "aadharNo=" + $("#email").val();
+                str += "contact" + $("#phone").val(); \
+                localStorage.setItem("myDetails", str);
+                tempUsers = localStorage.getItem("users");
+                if (tempUsers) {
+                    tempUsers += "?" + str;
+                }
+                else {
+                    tempUsers = str;
+                }
+                localStorage.setItem("users", tempUsers);
+                localStorage.setItem("saveDetails", $("#gridCheck1").is(":checked"))
+            }
         })
+
+
+        $("#signInButton").click(function () {
+            let myDetails = localStorage.getItem("myDetails").split(",");
+            let password = myDetails.filter((el) => {
+                return el.startsWith("password=");
+            })[0];
+
+            if (password === "password=" + $("#forSignIn #password").val()) {
+                localStorage.setItem("saveDetails", true);
+            }
+        })
+
+
+
+        $('#name').keydown(function (event) {
+            let data = event.originalEvent.key;
+            let result = (/([A-z]|\s)/g).test(data);
+            if (!result) {
+                event.preventDefault();
+            }
+        })
+
+
     </script>
 </body>
 

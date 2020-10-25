@@ -160,18 +160,21 @@ section:hover .section-title ~ div {
     transition: opacity 1s;
 }
 
-#accountsPage #contentBlock > div{
+#contentBlock > div{
     background: rgba(0, 0, 0, 0.2);
     z-index: 0;
-    display: none;
     transition: all 0.5s;
 }
 
-#accountsPage .form-group{
+#accountsPage #contentBlock > div{
+    display: none;
+}
+
+#contentBlock .form-group{
     align-items: center;
 }
 
-#accountsPage textarea{
+#contentBlock textarea{
     resize: none;
 }
 
