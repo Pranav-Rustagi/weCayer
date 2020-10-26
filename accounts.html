@@ -250,6 +250,7 @@
                         users[obj.email] = obj;
                         localStorage.setItem("users", JSON.stringify(users));
                         alert("Successfully signed up!");
+                        $(this).closest('form')[0].reset();
                         $('.nav-item.active').siblings().click();
                     }
                 }
@@ -287,8 +288,9 @@
                     if($('#gridCheck1').is(":checked")){
                         localStorage.setItem("myDetails", JSON.stringify(users[email]));
                     }
+                    $(this).closest('form')[0].reset();
                     alert("Successfully logged in")
-                    location.assign("./");
+                    location.replace("./");
                 }
                 else{
                     alert("Credentials don't match");

@@ -53,33 +53,86 @@
                         <a class="nav-link" href="">My page</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pr-0" href="">Log out</a>
+                        <a class="nav-link pr-0" data-action="logout" href="">Log out</a>
                     </li>
             </div>
         </nav>
     </section>
 
     <!-- content block -->
-    <section id="contentBlock" class="row justify-content-center text-light mx-0">
-        <div class="col-lg-5 col-md-8 col-sm-10 p-3">
+    <section id="helper" data-applied="helper">
+        <h1 class="section-title bg-dark text-light text-center font-weight-normal">Customer Validation :</h1>
+        <div id="contentBlock" class="row flex-column text-light mx-auto col-lg-5 col-md-8 col-sm-10 p-3">
             <h1 class="h1 px-3 mb-5 font-weight-normal text-uppercase text-center">Enter details</h1>
             <form>
                 <div class="form-group row m-0 px-3">
                     <label for="aadhar" class="col-sm-4 col-md-3 col-form-label px-0">Aadhar Number</label>
                     <input type="text" class="form-control col-sm-8 col-md-9" id="aadhar">
                 </div>
-                
+
                 <div class="form-group row m-0 px-3 mt-3">
-                    <button type="button" class="btn btn-success m-auto">Check user</button>
+                    <button type="button" id="checkUser" class="btn btn-success m-auto">Check user</button>
                 </div>
             </form>
         </div>
     </section>
 
-    <section id="#helpers" class="container">
-        
+    <section id="warrior" data-applied="warrior">
+        <h1 class="section-title bg-dark text-light text-center font-weight-normal">Helpers :</h1>
+        <div class="row m-auto">
+            <div class="col-sm-6 mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
+    <script>
+        var user = JSON.parse(sessionStorage.getItem("myDetails"));
+        var userType = user.appliedFor;
+
+        $(window).on('load', () => {
+            $('[data-applied]:not(#' + userType + ')').remove();
+
+            $('[data-action]').click(function (event) {
+                event.preventDefault();
+                sessionStorage.clear();
+                localStorage.removeItem("myDetails");
+                location.replace('./');
+            })
+
+            if (userType === 'warrior') {
+                render();
+            }
+            else {
+                $('#checkUser').click(function () {
+                    let aadharNo = $('#aadhar').val();
+                    let users = JSON.parse(localStorage.getItem("users"));
+                    let found = false;
+
+                    for (const [key, value] of Object.entries(users)) {
+                        if(value.aadharNo === aadharNo && value.appliedFor === 'warrior'){
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(found){
+                        alert("Customer is a covid warrior");
+                    }
+                    else{
+                        alert("Customer is not genuine");
+                    }
+                    $(this).closest('form')[0].reset();
+                })
+            }
+        })
+
+        function render() { }
+    </script>
 </body>
 
 </html>
