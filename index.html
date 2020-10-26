@@ -213,7 +213,11 @@
     <script>
 
         $(window).on('load', () => {
-            if (localStorage.getItem("myDetails") != null) {
+            if(localStorage.getItem("myDetails") != null){
+                let myDetails = localStorage.getItem("myDetails");
+                sessionStorage.setItem("myDetails", myDetails);
+            }
+            if (sessionStorage.getItem("myDetails") != null) {
                 $("#mainNav .nav-item:nth-last-child(2) .nav-link").removeAttr("data-action").attr("href", "myPage.html").text("My page")
                 $("#mainNav .nav-item:last-child .nav-link").attr("data-action", "logout").attr("href", "").text("Log Out");
             }
@@ -238,10 +242,11 @@
             else {
                 let target = $(this).find('.nav-link');
                 if (target.data("action") === "logout") {
+                    sessionStorage.clear();
                     localStorage.removeItem("myDetails");
                     location.reload();
                 }
-                else if($(this).is(':nth-last-child(2)') && localStorage.length){
+                else if($(this).is(':nth-last-child(2)') && sessionStorage.getItem("myDetails")){
                     location.href = target.attr("href");
                 }
                 else {

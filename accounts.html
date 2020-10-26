@@ -111,7 +111,7 @@
                 </div>
 
                 <div class="mt-5">
-                    <h1 class="h5 p-3 border-top border-light">Personal details : </h1>
+                    <h1 class="h5 p-3 border-top border-light">Basic details : </h1>
                     <div class="form-group row m-0 px-3 mt-3">
                         <label for="name" class="col-sm-4 col-md-3 col-form-label px-0">Full Name</label>
                         <input type="text" class="form-control col-sm-8 col-md-9" id="name">
@@ -125,8 +125,8 @@
                         <input class="form-control col-sm-8 col-md-9" type="tel" id="phone">
                     </div>
                     <div class="form-group row m-0 px-3 mt-3">
-                        <label for="address" class="col-sm-4 col-md-3 col-form-label px-0">Address</label>
-                        <textarea class="form-control col-sm-8 col-md-9" id="address" rows="3"></textarea>
+                        <label for="city" class="col-sm-4 col-md-3 col-form-label px-0">City</label>
+                        <input class="form-control col-sm-8 col-md-9" type="text" id="city">
                     </div>
                 </div>
                 <div class="mt-5">
@@ -139,11 +139,22 @@
                         </div>
                     </div>
                     <div class="form-group row m-0 px-3 mt-3">
-                        <label for="panCard" class="col-sm-4 col-md-3 col-form-label px-0">Pan Card</label>
-                        <div class="custom-file col-sm-8 col-md-9">
-                            <input type="file" class="custom-file-input" id="panCard">
-                            <label class="custom-file-label">Choose file</label>
-                        </div>
+                        <label for="aadharNo" class="col-sm-4 col-md-3 col-form-label px-0">Aadhar Number</label>
+                        <input class="form-control col-sm-8 col-md-9" type="text" id="aadharNo">
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <h1 class="h5 p-3 border-top border-light">Service you provide : </h1>
+                    <div class="form-group row m-0 px-3 mt-3">
+                        <label for="service" class="col-sm-4 col-md-3 col-form-label px-0">Service</label>
+                        <input class="form-control col-sm-8 col-md-9" type="text" id="service">
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <h1 class="h5 p-3 border-top border-light">Set password : </h1>
+                    <div class="form-group row m-0 px-3 mt-3">
+                        <label for="password" class="col-sm-4 col-md-3 col-form-label px-0">Password</label>
+                        <input class="form-control col-sm-8 col-md-9" type="password" id="password">
                     </div>
                 </div>
                 <div class="mt-5">
@@ -169,8 +180,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row m-0 px-3 mt-3">
-                    <button class="btn btn-success m-auto" type="button" id="continue">Continue</button>
+                <div class="form-group row m-0 px-3 mt-4 justify-content-around">
+                    <button class="btn btn-danger w-25" type="button" id="back">Back</button>
+                    <button class="btn btn-success w-25" type="button" id="continue">Continue</button>
                 </div>
             </form>
         </div>
@@ -196,6 +208,7 @@
             $(this).addClass('active').siblings().removeClass('active');
             let target = $(this).data("target");
             $('#contentBlock > div[data-block = ' + target + ']').show().siblings().hide();
+            $('#back').hide();
             if (target === 'signin') {
                 $('#forSignUp form > div:not(:first-child):not(:last-child)').slideUp()
             }
@@ -207,29 +220,60 @@
 
 
         $('#continue').click(function () {
-            let blocks = $(this).parent().siblings().filter(':visible').last();
+            let parent = $(this).parent();
+            let blocks = parent.siblings().filter(':visible');
             let next = blocks.next();
-            if (!next.is($(this).parent())) {
-                next.slideDown();
+
+            if (!next.is(parent)) {
+                blocks.slideUp('fast', () => {
+                    next.slideDown('slow');
+                    $('#back').show();
+                })
             }
             else {
-                str = "";
-                str += "appliedFor=" + $("[applyingFor]").val() + ",";
-                str += "email=" + $("#email").val() + ",";
-                str += "password" + $("#password").val() + ",";
-                str += "aadharNo=" + $("#email").val();
-                str += "contact" + $("#phone").val(); \
-                localStorage.setItem("myDetails", str);
-                tempUsers = localStorage.getItem("users");
-                if (tempUsers) {
-                    tempUsers += "?" + str;
+                let obj = {
+                    appliedFor: $("#forSignUp [name=applyingFor]:checked").val(),
+                    email: $("#forSignUp #email").val(),
+                    phone: $("#forSignUp #phone").val(),
+                    aadharNo: $("#forSignUp #aadharNo").val(),
+                    password: $("#forSignUp #password").val(),
+                    city: $("#forSignUp #city").val(),
+                    service: $("#forSignUp #service").val()
+                };
+
+                let users = JSON.parse(localStorage.getItem("users"));
+                if (users) {
+                    if (users[obj.email]) {
+                        alert("User already exists!")
+                    }
+                    else {
+                        users[obj.email] = obj;
+                        localStorage.setItem("users", JSON.stringify(users));
+                        alert("Successfully signed up!");
+                        $('.nav-item.active').siblings().click();
+                    }
                 }
                 else {
-                    tempUsers = str;
+                    users = {};
+                    users[obj.email] = obj;
+                    localStorage.setItem("users", JSON.stringify(users));
+                    alert("Successfully signed up!");
+                    $('.nav-item.active').siblings().click();
                 }
-                localStorage.setItem("users", tempUsers);
-                localStorage.setItem("saveDetails", $("#gridCheck1").is(":checked"))
             }
+        })
+
+        $('#back').click(function () {
+            let parent = $(this).parent();
+            let blocks = parent.siblings().filter(':visible');
+            let prev = blocks.prev();
+
+            blocks.slideUp('fast', () => {
+                prev.slideDown('slow');
+                if (prev.is(':first-child')) {
+                    $('#back').hide();
+                }
+            })
         })
 
 
