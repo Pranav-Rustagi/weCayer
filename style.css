@@ -129,6 +129,11 @@ section:not(#helper) .section-title ~ div {
     transition: all 0.5s;
 }
 
+#warrior .card-text svg{
+    position: relative;
+    top: -0.1rem;
+}
+
 /********************\
 |* About Us Section *|
 \********************/

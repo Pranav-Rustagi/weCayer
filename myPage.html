@@ -82,9 +82,40 @@
         <div class="row m-auto">
             <div class="col-sm-6 mb-5">
                 <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title font-weight-bold my-0">City</h5>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <p class="card-text">
+                            <span class="font-weight-bold">Helper Name :&nbsp;</span>
+                            <span class="spanName">Name</span>
+                        </p>
+                        <p class="card-text mb-4">
+                            <span class="font-weight-bold">Description :&nbsp;</span>
+                            <span class="spanDes">description</span>
+                        </p>
+                        <p class="card-text">
+                            <span class="text-success font-weight-bold">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-fill"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z" />
+                                </svg>
+                                Phone Number :&nbsp;
+                            </span>
+                            <span class="spanPhone">Number</span>
+                        </p>
+                        <p class="card-text">
+                            <span class="text-success font-weight-bold">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
+                                </svg>
+                                Email :&nbsp;
+                            </span>
+                            <span class="spanMail">mail</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -115,15 +146,15 @@
                     let found = false;
 
                     for (const [key, value] of Object.entries(users)) {
-                        if(value.aadharNo === aadharNo && value.appliedFor === 'warrior'){
+                        if (value.aadharNo === aadharNo && value.appliedFor === 'warrior') {
                             found = true;
                             break;
                         }
                     }
-                    if(found){
+                    if (found) {
                         alert("Customer is a covid warrior");
                     }
-                    else{
+                    else {
                         alert("Customer is not genuine");
                     }
                     $(this).closest('form')[0].reset();
@@ -131,7 +162,24 @@
             }
         })
 
-        function render() { }
+        function render() {
+            let container = $('#warrior .row');
+            let users = JSON.parse(localStorage.getItem("users"));
+            console.log(users)
+
+            for (const [key, value] of Object.entries(users)) {
+                if (value.appliedFor === 'helper') {
+                    let cloned = container.children(':first-child').clone();
+                    cloned.find(".card-title").text(value.city);
+                    cloned.find('.spanName').text(value.name);
+                    cloned.find('.spanDes').text(value.service);
+                    cloned.find('.spanPhone').text(value.phone);
+                    cloned.find('.spanMail').text(value.email);
+                    container.append(cloned);
+                }
+            }
+            container.children(':first-child').remove();
+        }
     </script>
 </body>
 
