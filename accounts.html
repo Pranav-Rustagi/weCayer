@@ -189,6 +189,9 @@
     </section>
 
     <script>
+
+        var detachable;
+        
         $(window).on('load', () => {
             let firstTemp = location.href.split('?target=')[1];
             var target;
@@ -315,6 +318,14 @@
             }
         })
 
+        $('[name=applyingFor]').change(function(){
+            if($(this).val() === 'warrior'){
+                detachable = $('#forSignUp form > div:nth-child(4)').detach();
+            }
+            else if(detachable != undefined){
+                $('#forSignUp form > div:nth-child(3)').after(detachable);
+            }
+        })
 
     </script>
 </body>
