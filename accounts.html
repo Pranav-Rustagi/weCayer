@@ -278,11 +278,25 @@
 
 
         $("#signInButton").click(function () {
-            let myDetails = localStorage.getItem("myDetails").split(",");
-            let password = myDetails.filter((el) => {
-                return el.startsWith("password=");
-            })[0];
-
+            let users = JSON.parse(localStorage.getItem("users"));
+            let email = $('#forSignIn #email').val();
+            if(users[email]){
+                let password = users[email].password;
+                if(password === $('#forSignIn #password').val()){
+                    sessionStorage.setItem("myDetails", JSON.stringify(users[email]));
+                    if($('#gridCheck1').is(":checked")){
+                        localStorage.setItem("myDetails", JSON.stringify(users[email]));
+                    }
+                    alert("Successfully logged in")
+                    location.assign("./");
+                }
+                else{
+                    alert("Credentials don't match");
+                }
+            }
+            else{
+                alert("User not found! Sign up first");
+            }
             if (password === "password=" + $("#forSignIn #password").val()) {
                 localStorage.setItem("saveDetails", true);
             }
